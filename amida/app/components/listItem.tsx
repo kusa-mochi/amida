@@ -6,6 +6,6 @@ type Props = {
 
 export const ListItem: FC<Props> = ({text}) => {
     return (
-        <div>{text}</div>
+        <div className="w-48 m-2 rounded-md bg-blue-500 text-white shadow-md">{text}</div>
     )
 }
