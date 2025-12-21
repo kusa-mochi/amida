@@ -1,4 +1,7 @@
-import { FC } from "react";
+"use client";
+
+import { FC, useContext, useEffect } from "react";
+import { GoalsContext } from "../page";
 import { ListItem } from "./listItem";
 import { AddButton } from "./addButton";
 
@@ -7,18 +10,12 @@ type Props = {
 }
 
 export const Init: FC<Props> = ({ gotoAmida }) => {
-  const items = [
-    "おいしいレストラン",
-    "好きなレストラン",
-    "楽しいレストラン",
-    "思い出のレストラン",
-    "新しいレストラン"
-  ];
+  const goals = useContext(GoalsContext);
   return (
     <div>
       <div>AMIDA</div>
       <div className="flex flex-col flex-nowrap justify-start items-center">
-        {items.map((item, index) => (
+        {goals.map((item, index) => (
           <div key={index} className="m-1">
             <ListItem>{item}</ListItem>
           </div>
