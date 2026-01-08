@@ -36,9 +36,9 @@ export const Amida: FC<Props> = ({ gotoInit }) => {
 
   return (
     <div>
-      <div>
+      <div className={`grid grid-cols-${nCols} gap-0 mb-4`}>
         {goals.map((item, index) => (
-          <div key={index}>{item}</div>
+          <div key={index} className="w-24">{item}</div>
         ))}
       </div>
       <div className={`grid grid-cols-${nCols} gap-0`}>
