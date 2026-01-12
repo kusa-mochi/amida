@@ -60,21 +60,41 @@ export const Amida: FC<Props> = ({ gotoInit }) => {
     let currentCol: number = startIndex;
     let currentDirection: Direction = Direction.Down;
     const nextPattern: AmidaPart[][] = [];
+    let stopLoop: boolean = false;
 
     const ifAmidaFin = (): boolean => {
       return (currentRow >= nRows && currentDirection === Direction.Down);
     }
 
-    // patternをnextPatternにコピー
+    // patternの太線部分をリセットしたものをnextPatternにコピー
     for (let r = 0; r < pattern.length; r++) {
       nextPattern[r] = [];
       for (let c = 0; c < pattern[r].length; c++) {
-        nextPattern[r][c] = pattern[r][c];
+        switch (pattern[r][c]) {
+          case AmidaPart.BOLD_U_TO_B:
+            nextPattern[r][c] = AmidaPart.U_TO_B;
+            break;
+          case AmidaPart.U_TO_B_BOLD_B_TO_L:
+            nextPattern[r][c] = AmidaPart.U_TO_BL;
+            break;
+          case AmidaPart.U_TO_B_BOLD_L_TO_U:
+            nextPattern[r][c] = AmidaPart.U_TO_BL;
+            break;
+          case AmidaPart.U_TO_B_BOLD_R_TO_B:
+            nextPattern[r][c] = AmidaPart.U_TO_RB;
+            break;
+          case AmidaPart.U_TO_B_BOLD_U_TO_R:
+            nextPattern[r][c] = AmidaPart.U_TO_RB;
+            break;
+          default:
+            nextPattern[r][c] = pattern[r][c];
+            break;
+        }
       }
     }
 
-    while (!ifAmidaFin()) {
-      const currentPart = pattern[currentRow][currentCol];
+    while (!ifAmidaFin() && !stopLoop) {
+      const currentPart = nextPattern[currentRow][currentCol];
 
       switch (currentDirection) {
         case Direction.Down:
@@ -96,9 +116,11 @@ export const Amida: FC<Props> = ({ gotoInit }) => {
           switch (currentPart) {
             case AmidaPart.U_TO_B:
               console.error("invalid state: left input direction to U_TO_B");
+              stopLoop = true;
               break;
             case AmidaPart.U_TO_BL:
               console.error("invalid state: left input direction to U_TO_BL");
+              stopLoop = true;
               break;
             case AmidaPart.U_TO_RB:
               nextPattern[currentRow][currentCol] = AmidaPart.U_TO_B_BOLD_R_TO_B;
@@ -110,6 +132,7 @@ export const Amida: FC<Props> = ({ gotoInit }) => {
           switch (currentPart) {
             case AmidaPart.U_TO_B:
               console.error("invalid state: right input direction to U_TO_B");
+              stopLoop = true;
               break;
             case AmidaPart.U_TO_BL:
               nextPattern[currentRow][currentCol] = AmidaPart.U_TO_B_BOLD_B_TO_L;
@@ -117,6 +140,7 @@ export const Amida: FC<Props> = ({ gotoInit }) => {
               break;
             case AmidaPart.U_TO_RB:
               console.error("invalid state: right input direction to U_TO_RB");
+              stopLoop = true;
               break;
           }
           break;
