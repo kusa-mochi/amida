@@ -4,22 +4,25 @@ import Image from "next/image";
 import { FC, useContext, useEffect, useState } from "react";
 import { GoalsContext } from "../page";
 import { AmidaPart, GetAmidaPattern } from "../funcs/utils";
+import { ListItem } from "./listItem";
 
 type Props = {
   gotoInit?: () => void;
 }
 
 export const Amida: FC<Props> = ({ gotoInit }) => {
-  const goals = useContext(GoalsContext);
-  const [nCols, setNCols] = useState(5);
+  const goalsContext = useContext(GoalsContext);
+  if (!goalsContext) return null;
+  const { goals, setGoals } = goalsContext;
+
   const [nRows, setNRows] = useState(15);
   const [pattern, setPattern] = useState<AmidaPart[][]>([]);
   
   useEffect(() => {
-    const p = GetAmidaPattern(nCols, nRows);
+    const p = GetAmidaPattern(goals.length, nRows);
     setPattern(p);
     console.log(p);
-  }, [nCols, nRows]);
+  }, [goals]);
 
   const amidaPartToImageSrc = (part: AmidaPart): string => {
     switch (part) {
@@ -36,12 +39,12 @@ export const Amida: FC<Props> = ({ gotoInit }) => {
 
   return (
     <div>
-      <div className={`grid grid-cols-${nCols} gap-0 mb-4`}>
+      <div className={`grid grid-cols-${goals.length} gap-0 mb-4`}>
         {goals.map((item, index) => (
           <div key={index} className="w-24">{item}</div>
         ))}
       </div>
-      <div className={`grid grid-cols-${nCols} gap-0`}>
+      <div className={`grid grid-cols-${goals.length} gap-0`}>
         {
           pattern.map((row, rIndex) => (
             row.map((part, cIndex) => (
