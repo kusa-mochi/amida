@@ -37,12 +37,24 @@ export const Amida: FC<Props> = ({ gotoInit }) => {
     }
   }
 
+  const startAmida = (startIndex: number) => {
+    console.log("Start Amida: ", startIndex);
+    
+  }
+
   return (
     <div>
       <div className={`grid grid-cols-${goals.length} gap-0 mb-4`}>
-        {goals.map((item, index) => (
-          <div key={index} className="w-24">{item}</div>
-        ))}
+        {// goals.lengthの数だけテキスト入力用のinput要素を並べる
+          goals.map((_, index) => (
+            <div key={index} className="w-24"><input type="text" defaultValue={""} className="w-24" /></div>
+          ))
+        }
+        {// goals.lengthの数だけくじ引き開始のボタンを並べる
+          goals.map((_, index) => (
+            <div key={index} className="w-24 text-center"><button onClick={() => startAmida(index)}>Start</button></div>
+          ))
+        }
       </div>
       <div className={`grid grid-cols-${goals.length} gap-0`}>
         {
@@ -53,6 +65,12 @@ export const Amida: FC<Props> = ({ gotoInit }) => {
           ))
         }
       </div>
+      <div className={`grid grid-cols-${goals.length} gap-0 mb-4`}>
+        {goals.map((item, index) => (
+          <div key={index} className="w-24">{item}</div>
+        ))}
+      </div>
+      <button onClick={gotoInit}>Go to Init</button>
     </div>
   );
 };
