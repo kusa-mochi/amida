@@ -52,24 +52,6 @@ export const Amida: FC<Props> = ({ gotoInit }) => {
             ))
           ))
         }
-        {/* <Image src="u_to_b.svg" alt="ababa" />
-        <Image src="bold_u_to_b.svg" alt="ababa" />
-        <Image src="u_to_b.svg" alt="ababa" />
-        <Image src="u_to_b.svg" alt="ababa" />
-        <Image src="u_to_b.svg" alt="ababa" />
-
-        <Image src="u_to_b_bold_r_to_b.svg" alt="ababa" />
-        <Image src="u_to_b_bold_l_to_u.svg" alt="ababa" />
-        <Image src="u_to_rb.svg" alt="ababa" />
-        <Image src="u_to_bl.svg" alt="ababa" />
-        <Image src="u_to_b.svg" alt="ababa" />
-
-        <Image src="bold_u_to_b.svg" alt="ababa" />
-        <Image src="u_to_rb.svg" alt="ababa" />
-        <Image src="u_to_bl.svg" alt="ababa" />
-        <Image src="u_to_b.svg" alt="ababa" />
-        <Image src="u_to_b.svg" alt="ababa" /> */}
-        <button onClick={gotoInit}>Go to Init</button>
       </div>
     </div>
   );
