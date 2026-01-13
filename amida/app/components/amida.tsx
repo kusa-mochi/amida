@@ -24,11 +24,13 @@ export const Amida: FC<Props> = ({ gotoInit }) => {
 
   const [nRows, setNRows] = useState(15);
   const [pattern, setPattern] = useState<AmidaPart[][]>([]);
+  const [goalVisibilities, setGoalVisibilities] = useState<boolean[]>([]);
 
   useEffect(() => {
     const p = GetAmidaPattern(goals.length, nRows);
     setPattern(p);
     console.log(p);
+    setGoalVisibilities(new Array(goals.length).fill(false));
   }, [goals]);
 
   const amidaPartToImageSrc = (part: AmidaPart): string => {
@@ -160,6 +162,10 @@ export const Amida: FC<Props> = ({ gotoInit }) => {
     }
 
     setPattern(nextPattern);
+
+    const newVisibilities = new Array(goals.length).fill(false);
+    newVisibilities[currentCol] = true;
+    setGoalVisibilities(newVisibilities);
   }
 
   return (
@@ -187,7 +193,7 @@ export const Amida: FC<Props> = ({ gotoInit }) => {
       </div>
       <div className={`grid grid-cols-${goals.length} gap-0 mb-4`}>
         {goals.map((item, index) => (
-          <div key={index} className="w-24">{item}</div>
+          <div key={index} className="w-24" style={{ visibility: goalVisibilities[index] ? 'visible' : 'hidden' }}>{item}</div>
         ))}
       </div>
       <button onClick={gotoInit}>Go to Init</button>
