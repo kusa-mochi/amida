@@ -1,19 +1,21 @@
 "use client";
 
-import Image from "next/image";
 import { Init } from "./components/init";
 import { Amida } from "./components/amida";
 import { createContext, useState } from "react";
+import { v4 as uuidv4 } from 'uuid';
 
-export const GoalsContext = createContext<{ goals: string[], setGoals: (goals: string[]) => void } | null>(null);
+export type Goal = {
+  id: string;
+  value: string;
+};
+export const GoalsContext = createContext<{ goals: Goal[], setGoals: (goals: Goal[]) => void } | null>(null);
 
 export default function Home() {
-  const [goals, setGoals] = useState([
-    "おいしいレストラン",
-    "好きなレストラン",
-    "楽しいレストラン",
-    "思い出のレストラン",
-    "新しいレストラン"
+  const [goals, setGoals] = useState<Goal[]>([
+    {id: uuidv4(), value:"おいしいレストラン"},
+    {id: uuidv4(), value:"楽しいレストラン"},
+    {id: uuidv4(), value:"思い出のレストラン"},
   ]);
   const [initVisible, setInitVisible] = useState(true);
   const [amidaVisible, setAmidaVisible] = useState(false);

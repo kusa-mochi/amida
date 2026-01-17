@@ -193,7 +193,7 @@ export const Amida: FC<Props> = ({ gotoInit }) => {
       </div>
       <div className={`grid grid-cols-${goals.length} gap-0 mb-4`}>
         {goals.map((item, index) => (
-          <div key={index} className="w-24" style={{ visibility: goalVisibilities[index] ? 'visible' : 'hidden' }}>{item}</div>
+          <div key={item.id} className="w-24" style={{ visibility: goalVisibilities[index] ? 'visible' : 'hidden' }}>{item.value}</div>
         ))}
       </div>
       <button onClick={gotoInit}>Go to Init</button>
