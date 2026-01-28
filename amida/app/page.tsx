@@ -13,9 +13,9 @@ export const GoalsContext = createContext<{ goals: Goal[], setGoals: (goals: Goa
 
 export default function Home() {
   const [goals, setGoals] = useState<Goal[]>([
-    {id: uuidv4(), value:"おいしいレストラン"},
-    {id: uuidv4(), value:"楽しいレストラン"},
-    {id: uuidv4(), value:"思い出のレストラン"},
+    {id: uuidv4(), value:""},
+    {id: uuidv4(), value:""},
+    {id: uuidv4(), value:""},
   ]);
   const [initVisible, setInitVisible] = useState(true);
   const [amidaVisible, setAmidaVisible] = useState(false);
