@@ -6,6 +6,7 @@ import { GoalsContext } from "../page";
 import { AmidaPart, GetAmidaPattern } from "../funcs/utils";
 import { ListItem } from "./listItem";
 import next from "next";
+import { GoButton } from "./goButton";
 
 type Props = {
   gotoInit?: () => void;
@@ -196,7 +197,7 @@ export const Amida: FC<Props> = ({ gotoInit }) => {
           <div key={item.id} className="w-24" style={{ visibility: goalVisibilities[index] ? 'visible' : 'hidden' }}>{item.value}</div>
         ))}
       </div>
-      <button onClick={gotoInit}>Go to Init</button>
+      <GoButton onClick={gotoInit}>Back</GoButton>
     </div>
   );
 };

@@ -6,6 +6,7 @@ import { ListItem } from "./listItem";
 import { AddButton } from "./addButton";
 import { v4 as uuidv4 } from 'uuid';
 import { Orbitron } from "next/font/google";
+import { GoButton } from "./goButton";
 
 const orbitron = Orbitron({
   subsets: ["latin"],
@@ -37,7 +38,7 @@ export const Init: FC<Props> = ({ gotoAmida }) => {
   }
 
   return (
-    <div className="w-full">
+    <div className="w-full ">
       <div className={`${orbitron.className} mb-8`}><span className="text-4xl">AMIDA</span><span className="ml-6 text-4sm">by.slash-mochi.net</span></div>
       <div className="flex flex-col flex-nowrap justify-start items-center">
         {goals.map((item) => (
@@ -47,7 +48,7 @@ export const Init: FC<Props> = ({ gotoAmida }) => {
         ))}
         <div className="m-1"><AddButton onClick={addItem} /></div>
       </div>
-      <button onClick={gotoAmida}>Start</button>
+      <GoButton onClick={gotoAmida}>Start</GoButton>
     </div>
   )
 }
