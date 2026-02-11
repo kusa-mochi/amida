@@ -171,6 +171,7 @@ export const Amida: FC<Props> = ({ gotoInit }) => {
 
   return (
     <div>
+      <div>どれか一つを選んでね</div>
       <div className={`grid grid-cols-${goals.length} gap-0 mb-4`}>
         {// goals.lengthの数だけテキスト入力用のinput要素を並べる
           goals.map((_, index) => (
