@@ -7,6 +7,7 @@ import { AddButton } from "./addButton";
 import { v4 as uuidv4 } from 'uuid';
 import { Orbitron } from "next/font/google";
 import { GoButton } from "./goButton";
+import { useTranslation } from "react-i18next";
 
 const orbitron = Orbitron({
   subsets: ["latin"],
@@ -18,6 +19,7 @@ type Props = {
 }
 
 export const Init: FC<Props> = ({ gotoAmida }) => {
+  const { t } = useTranslation();
   const goalsContext = useContext(GoalsContext);
   if (!goalsContext) return null;
   const { goals, setGoals } = goalsContext;
@@ -39,7 +41,7 @@ export const Init: FC<Props> = ({ gotoAmida }) => {
 
   return (
     <div className="w-full ">
-      <div className={`${orbitron.className} mb-8`}><span className="text-4xl">AMIDA</span><span className="ml-6 text-4sm">by.slash-mochi.net</span></div>
+      <div className={`${orbitron.className} mb-8`}><span className="text-4xl">{t("appTitle")}</span><span className="ml-6 text-4sm">by.slash-mochi.net</span></div>
       <div className="flex flex-col flex-nowrap justify-start items-center">
         {goals.map((item) => (
           <div key={item.id} className="w-full m-1">
@@ -48,7 +50,7 @@ export const Init: FC<Props> = ({ gotoAmida }) => {
         ))}
         <div className="m-1"><AddButton onClick={addItem} /></div>
       </div>
-      <GoButton onClick={gotoAmida}>Start</GoButton>
+      <GoButton onClick={gotoAmida}>{t("start")}</GoButton>
     </div>
   )
 }
