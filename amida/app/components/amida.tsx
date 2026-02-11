@@ -7,6 +7,7 @@ import { AmidaPart, GetAmidaPattern } from "../funcs/utils";
 import { ListItem } from "./listItem";
 import next from "next";
 import { GoButton } from "./goButton";
+import { useTranslation } from "react-i18next";
 
 type Props = {
   gotoInit?: () => void;
@@ -22,6 +23,8 @@ export const Amida: FC<Props> = ({ gotoInit }) => {
   const goalsContext = useContext(GoalsContext);
   if (!goalsContext) return null;
   const { goals, setGoals } = goalsContext;
+
+  const { t } = useTranslation();
 
   const [nRows, setNRows] = useState(15);
   const [pattern, setPattern] = useState<AmidaPart[][]>([]);
@@ -171,7 +174,7 @@ export const Amida: FC<Props> = ({ gotoInit }) => {
 
   return (
     <div>
-      <div>どれか一つを選んでね</div>
+      <div className="text-center mb-4">{t("selectOne")}</div>
       <div className={`grid grid-cols-${goals.length} gap-0 mb-4`}>
         {// goals.lengthの数だけテキスト入力用のinput要素を並べる
           goals.map((_, index) => (
@@ -198,7 +201,7 @@ export const Amida: FC<Props> = ({ gotoInit }) => {
           <div key={item.id} className="w-24" style={{ visibility: goalVisibilities[index] ? 'visible' : 'hidden' }}>{item.value}</div>
         ))}
       </div>
-      <GoButton onClick={gotoInit}>Back</GoButton>
+      <GoButton onClick={gotoInit}>{t("back")}</GoButton>
     </div>
   );
 };
