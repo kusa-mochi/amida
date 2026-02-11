@@ -1,4 +1,7 @@
 {
     "appTitle": "LADDER LOTTERY",
-    "start": "Start"
+    "start": "Start",
+    "back": "Back",
+    "itemPlaceholder": "Please enter your choices",
+    "selectOne": "Please select one"
 }

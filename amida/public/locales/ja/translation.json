@@ -1,4 +1,7 @@
 {
     "appTitle": "AMIDA",
-    "start": "スタート"
+    "start": "スタート",
+    "back": "戻る",
+    "itemPlaceholder": "あみだくじの選択肢を書いてね",
+    "selectOne": "どれか一つを選んでね"
 }
