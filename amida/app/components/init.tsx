@@ -24,11 +24,17 @@ export const Init: FC<Props> = ({ gotoAmida }) => {
   if (!goalsContext) return null;
   const { goals, setGoals } = goalsContext;
   const [canAdd, setCanAdd] = useState(true);
+  const [canDelete, setCanDelete] = useState(true);
 
   const addItem = () => {
     // 追加後のgoalsの要素数が10以上となる場合、追加できないようにする。
     if (goals.length >= 9) {
       setCanAdd(false);
+    }
+
+    // 追加後のgoalsの要素数が3以上となる場合、削除できるようにする。
+    if (goals.length >= 2) {
+      setCanDelete(true);
     }
 
     // goalsの末尾に空文字列の要素を1つ追加する。
@@ -46,6 +52,11 @@ export const Init: FC<Props> = ({ gotoAmida }) => {
       setCanAdd(true);
     }
 
+    // 削除後のgoalsの要素数が3未満の場合、削除できないようにする。
+    if (goals.length <= 3) {
+      setCanDelete(false);
+    }
+
     const newGoals = goals.filter(goal => goal.id !== id);
     setGoals(newGoals);
   }
@@ -56,7 +67,7 @@ export const Init: FC<Props> = ({ gotoAmida }) => {
       <div className="flex flex-col flex-nowrap justify-start items-center">
         {goals.map((item) => (
           <div key={item.id} className="w-full m-1">
-            <ListItem label={item.value} onChange={(newValue) => changeItem(newValue, item.id)} onDelete={() => deleteItem(item.id)}></ListItem>
+            <ListItem label={item.value} canDelete={canDelete} onChange={(newValue) => changeItem(newValue, item.id)} onDelete={() => deleteItem(item.id)}></ListItem>
           </div>
         ))}
         <div className="m-1"><AddButton onClick={addItem} disabled={!canAdd} /></div>
