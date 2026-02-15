@@ -26,7 +26,7 @@ export const Amida: FC<Props> = ({ gotoInit }) => {
   const nCols = goals.length;
   const { t } = useTranslation();
 
-  const [nRows, setNRows] = useState(11);
+  const [nRows, setNRows] = useState(nCols * 2 - 2 < 8 ? 8 : nCols * 2 - 2);
   const [pattern, setPattern] = useState<AmidaPart[][]>([]);
   const [goalVisibilities, setGoalVisibilities] = useState<boolean[]>([]);
 
