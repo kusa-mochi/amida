@@ -14,9 +14,7 @@ export const ListItem: FC<Props> = ({ label, onChange, onDelete }) => {
     const { t } = useTranslation();
     return (
         <div className="flex flex-row flex-nowrap justify-start items-center">
-            <div className="w-full p-2 mr-3 rounded-md shadow-md border border-gray-300">
-                <input type="text" defaultValue={label} className="w-full outline-none" placeholder={t("itemPlaceholder")} onChange={(e) => onChange?.(e.target.value)} />
-            </div>
+            <input type="text" defaultValue={label} className="w-full mr-2 p-1 outline-[#169632] outline-offset-2 not-fucus:outline-hidden focus:outline-[2px] border border-gray-300 rounded-md" placeholder={t("itemPlaceholder")} onChange={(e) => onChange?.(e.target.value)} />
             <DeleteIcon onClick={onDelete} />
         </div>
     )

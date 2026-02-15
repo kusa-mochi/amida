@@ -178,7 +178,7 @@ export const Amida: FC<Props> = ({ gotoInit }) => {
       <div className={`grid grid-cols-${goals.length} gap-0 mb-4`}>
         {// goals.lengthの数だけテキスト入力用のinput要素を並べる
           goals.map((_, index) => (
-            <div key={index} className="w-24"><input type="text" defaultValue={""} className="w-24" /></div>
+            <div key={index} className="w-24"><input type="text" defaultValue={""} placeholder={t("yourName")} className="w-24 p-1 outline-[#169632] outline-offset-2 not-fucus:outline-hidden focus:outline-[2px] border border-gray-300 rounded-md text-center" /></div>
           ))
         }
         {// goals.lengthの数だけくじ引き開始のボタンを並べる
@@ -198,7 +198,7 @@ export const Amida: FC<Props> = ({ gotoInit }) => {
       </div>
       <div className={`grid grid-cols-${goals.length} gap-0 mb-4`}>
         {goals.map((item, index) => (
-          <div key={item.id} className="w-24" style={{ visibility: goalVisibilities[index] ? 'visible' : 'hidden' }}>{item.value}</div>
+          <div key={item.id} className={`w-24 text-center ${goalVisibilities[index] ? 'visible' : 'invisible'}`}>{item.value}</div>
         ))}
       </div>
       <GoButton onClick={gotoInit}>{t("back")}</GoButton>
