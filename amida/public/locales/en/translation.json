@@ -3,5 +3,7 @@
     "start": "Start",
     "back": "Back",
     "itemPlaceholder": "Please enter your choices",
-    "selectOne": "Please select one"
+    "selectOne": "Please select one",
+    "yourName": "Name"
 }
+    
