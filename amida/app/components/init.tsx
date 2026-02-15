@@ -1,6 +1,6 @@
 "use client";
 
-import { FC, useContext, useEffect, useState } from "react";
+import { FC, useContext, useState } from "react";
 import { GoalsContext } from "../page";
 import { ListItem } from "./listItem";
 import { AddButton } from "./addButton";
@@ -21,10 +21,13 @@ type Props = {
 export const Init: FC<Props> = ({ gotoAmida }) => {
   const { t } = useTranslation();
   const goalsContext = useContext(GoalsContext);
-  if (!goalsContext) return null;
-  const { goals, setGoals } = goalsContext;
+
+  const goals = goalsContext?.goals ?? [];
+  const setGoals = goalsContext?.setGoals;
   const [canAdd, setCanAdd] = useState(true);
   const [canDelete, setCanDelete] = useState(true);
+
+  if (!goalsContext || !setGoals) return null;
 
   const addItem = () => {
     // 追加後のgoalsの要素数が10以上となる場合、追加できないようにする。

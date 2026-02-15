@@ -1,11 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import { FC, useContext, useEffect, useState } from "react";
+import { FC, useContext, useEffect, useMemo, useState } from "react";
 import { GoalsContext } from "../page";
 import { AmidaPart, GetAmidaPattern } from "../funcs/utils";
-import { ListItem } from "./listItem";
-import next from "next";
 import { GoButton } from "./goButton";
 import { useTranslation } from "react-i18next";
 
@@ -21,21 +19,22 @@ enum Direction {
 
 export const Amida: FC<Props> = ({ gotoInit }) => {
   const goalsContext = useContext(GoalsContext);
-  if (!goalsContext) return null;
-  const { goals, setGoals } = goalsContext;
-  const nCols = goals.length;
   const { t } = useTranslation();
 
-  const [nRows, setNRows] = useState(nCols * 2 - 2 < 8 ? 8 : nCols * 2 - 2);
+  const goals = useMemo(() => goalsContext?.goals ?? [], [goalsContext]);
+  const nCols = goals.length;
+
+  const nRows: number = nCols * 2 - 2 < 8 ? 8 : nCols * 2 - 2; // 列数が少ないとあみだくじのパターンが単調になるため、行数は最低でも8行にする。
   const [pattern, setPattern] = useState<AmidaPart[][]>([]);
   const [goalVisibilities, setGoalVisibilities] = useState<boolean[]>([]);
 
   useEffect(() => {
+    if (!goalsContext) return;
     const p = GetAmidaPattern(nCols, nRows);
     setPattern(p);
     console.log(p);
     setGoalVisibilities(new Array(nCols).fill(false));
-  }, [goals]);
+  }, [goals, goalsContext, nCols, nRows]);
 
   const amidaPartToImageSrc = (part: AmidaPart): string => {
     switch (part) {
