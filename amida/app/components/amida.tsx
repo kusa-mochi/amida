@@ -23,7 +23,7 @@ export const Amida: FC<Props> = ({ gotoInit }) => {
   const goalsContext = useContext(GoalsContext);
   if (!goalsContext) return null;
   const { goals, setGoals } = goalsContext;
-
+  const nCols = goals.length;
   const { t } = useTranslation();
 
   const [nRows, setNRows] = useState(11);
@@ -31,10 +31,10 @@ export const Amida: FC<Props> = ({ gotoInit }) => {
   const [goalVisibilities, setGoalVisibilities] = useState<boolean[]>([]);
 
   useEffect(() => {
-    const p = GetAmidaPattern(goals.length, nRows);
+    const p = GetAmidaPattern(nCols, nRows);
     setPattern(p);
     console.log(p);
-    setGoalVisibilities(new Array(goals.length).fill(false));
+    setGoalVisibilities(new Array(nCols).fill(false));
   }, [goals]);
 
   const amidaPartToImageSrc = (part: AmidaPart): string => {
