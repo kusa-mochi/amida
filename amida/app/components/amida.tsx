@@ -175,16 +175,24 @@ export const Amida: FC<Props> = ({ gotoInit }) => {
     <div>
       <div className="text-center mb-4">{t("selectOne")}</div>
       <div className={`grid grid-cols-${goals.length} gap-0 mb-4`}>
-        {// goals.lengthの数だけテキスト入力用のinput要素を並べる
-          goals.map((_, index) => (
-            <div key={index} className="w-24"><input type="text" defaultValue={""} placeholder={t("yourName")} className="w-24 p-1 outline-[#169632] outline-offset-2 not-fucus:outline-hidden focus:outline-[2px] border border-gray-300 rounded-md text-center" /></div>
-          ))
-        }
-        {// goals.lengthの数だけくじ引き開始のボタンを並べる
-          goals.map((_, index) => (
-            <div key={index} className="w-24 text-center"><button onClick={() => startAmida(index)}>Start</button></div>
-          ))
-        }
+        {goals.map((_, index) => (
+          <textarea
+            key={`input-${index}`}
+            defaultValue={""}
+            placeholder={t("yourName")}
+            rows={1}
+            className="w-full p-0.5 outline-[#169632] outline-offset-2 focus:outline-[2px] border border-gray-300 rounded-md text-center resize-none overflow-auto whitespace-pre-wrap break-words leading-tight box-border"
+          />
+        ))}
+        {goals.map((_, index) => (
+          <button
+            key={`button-${index}`}
+            onClick={() => startAmida(index)}
+            className="px-2 py-1 text-sm"
+          >
+            Start
+          </button>
+        ))}
       </div>
       <div className={`grid grid-cols-${goals.length} gap-0`}>
         {
