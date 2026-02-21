@@ -190,7 +190,7 @@ export const Amida: FC<Props> = ({ gotoInit }) => {
         {
           pattern.map((row, rIndex) => (
             row.map((part, cIndex) => (
-              <Image key={`${rIndex}-${cIndex}`} width={100} height={50} src={amidaPartToImageSrc(part)} alt="ababa" />
+              <Image key={`${rIndex}-${cIndex}`} width={100} height={50} src={amidaPartToImageSrc(part)} alt="" />
             ))
           ))
         }
