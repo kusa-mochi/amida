@@ -71,7 +71,12 @@ export const Init: FC<Props> = ({ gotoAmida }) => {
 
   return (
     <div className="w-full ">
-      <div className={`${orbitron.className} mb-8`}><span className="text-4xl">{t("appTitle")}</span><span className="ml-6 text-4sm">by.<a href="https://slash-mochi.net/" target="_blank" className="text-blue-600 hover:text-blue-800 hover:underline">slash-mochi.net</a></span></div>
+      <div className={`${orbitron.className} mb-8 flex flex-col md:flex-row md:items-baseline md:gap-4 gap-2`}>
+        <span className="text-4xl">{t("appTitle")}</span>
+        <span className="text-sm md:text-base">
+          by.<a href="https://slash-mochi.net/" target="_blank" className="text-blue-600 hover:text-blue-800 hover:underline">slash-mochi.net</a>
+        </span>
+      </div>
       <div className="flex flex-col flex-nowrap justify-start items-center">
         {goals.map((item) => (
           <div key={item.id} className="w-full m-1">

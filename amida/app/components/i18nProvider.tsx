@@ -2,6 +2,7 @@
 
 import { ReactNode, useEffect, useState } from "react";
 import i18n from "@/i18n/config";
+import { LanguageSwitcher } from "./languageSwitcher";
 
 export default function I18nProvider({ children }: { children: ReactNode }) {
   const [isInitialized, setIsInitialized] = useState(false);
@@ -36,5 +37,10 @@ export default function I18nProvider({ children }: { children: ReactNode }) {
     return null; // またはローディングインジケーターなど
   }
 
-  return <>{children}</>;
+  return (
+    <>
+      <LanguageSwitcher />
+      {children}
+    </>
+  );
 }

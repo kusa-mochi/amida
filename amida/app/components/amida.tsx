@@ -172,41 +172,52 @@ export const Amida: FC<Props> = ({ gotoInit }) => {
   }
 
   return (
-    <div>
+    <div className="flex flex-col items-start">
       <div className="text-center mb-4">{t("selectOne")}</div>
-      <div className={`grid grid-cols-${goals.length} gap-0 mb-4`}>
-        {goals.map((_, index) => (
-          <textarea
-            key={`input-${index}`}
-            defaultValue={""}
-            placeholder={t("yourName")}
-            rows={1}
-            className="w-full p-0.5 outline-[#169632] outline-offset-2 focus:outline-[2px] border border-gray-300 rounded-md text-center resize-none overflow-auto whitespace-pre-wrap break-words leading-tight box-border"
-          />
-        ))}
-        {goals.map((_, index) => (
-          <button
-            key={`button-${index}`}
-            onClick={() => startAmida(index)}
-            className="px-2 py-1 text-sm"
-          >
-            Start
-          </button>
-        ))}
-      </div>
-      <div className={`grid grid-cols-${goals.length} gap-0`}>
-        {
-          pattern.map((row, rIndex) => (
-            row.map((part, cIndex) => (
-              <Image key={`${rIndex}-${cIndex}`} width={100} height={50} src={amidaPartToImageSrc(part)} alt="" />
+      <div>
+        <div 
+          className="gap-0 mb-4"
+          style={{ display: 'grid', gridTemplateColumns: `repeat(${goals.length}, minmax(100px, 100px))` }}
+        >
+          {goals.map((_, index) => (
+            <textarea
+              key={`input-${index}`}
+              defaultValue={""}
+              placeholder={t("yourName")}
+              rows={1}
+              className="w-full p-0.5 outline-[#169632] outline-offset-2 focus:outline-[2px] border border-gray-300 rounded-md text-center resize-none overflow-auto whitespace-pre-wrap break-words leading-tight box-border"
+            />
+          ))}
+          {goals.map((_, index) => (
+            <button
+              key={`button-${index}`}
+              onClick={() => startAmida(index)}
+              className="px-2 py-1 text-sm"
+            >
+              Start
+            </button>
+          ))}
+        </div>
+        <div 
+          className={`grid gap-0 justify-items-center items-center w-fit mx-auto`}
+          style={{ gridTemplateColumns: `repeat(${goals.length}, minmax(100px, 100px))` }}
+        >
+          {
+            pattern.map((row, rIndex) => (
+              row.map((part, cIndex) => (
+                <Image key={`${rIndex}-${cIndex}`} width={100} height={50} src={amidaPartToImageSrc(part)} alt="" className="block" />
+              ))
             ))
-          ))
-        }
-      </div>
-      <div className={`grid grid-cols-${goals.length} gap-0 mb-4`}>
-        {goals.map((item, index) => (
-          <div key={item.id} className={`w-24 text-center ${goalVisibilities[index] ? 'visible' : 'invisible'}`}>{item.value}</div>
-        ))}
+          }
+        </div>
+        <div 
+          className="gap-0 mb-4"
+          style={{ display: 'grid', gridTemplateColumns: `repeat(${goals.length}, minmax(100px, 100px))` }}
+        >
+          {goals.map((item, index) => (
+            <div key={item.id} className="text-center">{goalVisibilities[index] ? item.value : ''}</div>
+          ))}
+        </div>
       </div>
       <GoButton onClick={gotoInit}>{t("back")}</GoButton>
     </div>
