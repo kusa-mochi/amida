@@ -1,5 +1,15 @@
 <svg width="101" height="51" xmlns="http://www.w3.org/2000/svg">
-    <g fill="transparent" stroke="#000000" stroke-width="1">
+    <style type="text/css"><![CDATA[
+        /* default: light mode */
+        svg { color: #000000; }
+        g { fill: transparent; stroke: currentColor; stroke-width: 1; }
+        /* respect user's dark preference when SVG is loaded as an image */
+        @media (prefers-color-scheme: dark) {
+            svg { color: #ffffff; }
+        }
+    ]]></style>
+
+    <g>
         <path d="M 50 0 L 50 51" />
     </g>
 </svg>
