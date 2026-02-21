@@ -26,6 +26,8 @@ export const Init: FC<Props> = ({ gotoAmida }) => {
   const setGoals = goalsContext?.setGoals;
   const [canAdd, setCanAdd] = useState(true);
   const [canDelete, setCanDelete] = useState(true);
+  // track which item should receive focus after being added
+  const [focusId, setFocusId] = useState<string | null>(null);
 
   if (!goalsContext || !setGoals) return null;
 
@@ -40,8 +42,11 @@ export const Init: FC<Props> = ({ gotoAmida }) => {
       setCanDelete(true);
     }
 
+    // 新規IDを生成しておく（あとでfocusIdに設定）
+    const newId = uuidv4();
     // goalsの末尾に空文字列の要素を1つ追加する。
-    setGoals([...goals, { id: uuidv4(), value: "" }]);
+    setGoals([...goals, { id: newId, value: "" }]);
+    setFocusId(newId);
   }
 
   const changeItem = (newValue: string, id: string) => {
@@ -70,7 +75,17 @@ export const Init: FC<Props> = ({ gotoAmida }) => {
       <div className="flex flex-col flex-nowrap justify-start items-center">
         {goals.map((item) => (
           <div key={item.id} className="w-full m-1">
-            <ListItem label={item.value} canDelete={canDelete} onChange={(newValue) => changeItem(newValue, item.id)} onDelete={() => deleteItem(item.id)}></ListItem>
+            <ListItem
+              label={item.value}
+              canDelete={canDelete}
+              onChange={(newValue) => changeItem(newValue, item.id)}
+              onDelete={() => deleteItem(item.id)}
+              autoFocus={focusId === item.id}
+              onFocused={() => {
+                // once focus is given we no longer need to remember the id
+                if (focusId === item.id) setFocusId(null);
+              }}
+            ></ListItem>
           </div>
         ))}
         <div className="m-1"><AddButton onClick={addItem} disabled={!canAdd} /></div>
