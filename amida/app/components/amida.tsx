@@ -172,7 +172,8 @@ export const Amida: FC<Props> = ({ gotoInit }) => {
   }
 
   return (
-    <div className="w-full flex flex-col items-start">
+    // wrap entire content so horizontal overflow scrolls here instead of the whole page
+    <div className="w-full flex flex-col items-start overflow-x-auto">
       <div className="text-center mb-4">{t("selectOne")}</div>
       <div>
         <div 

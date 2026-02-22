@@ -1,6 +1,7 @@
 "use client";
 
 import { ReactNode, useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import i18n from "@/i18n/config";
 import { LanguageSwitcher } from "./languageSwitcher";
 
@@ -39,7 +40,9 @@ export default function I18nProvider({ children }: { children: ReactNode }) {
 
   return (
     <>
-      <LanguageSwitcher />
+      {/* render LanguageSwitcher in a portal so it's attached directly to <body> */}
+      {typeof document !== "undefined" &&
+        createPortal(<LanguageSwitcher />, document.body)}
       {children}
     </>
   );

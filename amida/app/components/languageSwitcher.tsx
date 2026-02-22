@@ -21,7 +21,7 @@ export const LanguageSwitcher = () => {
   };
 
   return (
-    <div className="fixed top-4 right-4 z-50">
+    <div className="fixed top-2 right-2 z-50">
       <button
         onClick={() => setIsDropdownOpen(!isDropdownOpen)}
         className="flex items-center gap-2 px-3 py-2 bg-white dark:bg-slate-800 border border-gray-300 dark:border-gray-600 rounded-md shadow-md hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors"
