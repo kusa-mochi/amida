@@ -172,7 +172,7 @@ export const Amida: FC<Props> = ({ gotoInit }) => {
   }
 
   return (
-    <div className="flex flex-col items-start">
+    <div className="w-full flex flex-col items-start">
       <div className="text-center mb-4">{t("selectOne")}</div>
       <div>
         <div 
